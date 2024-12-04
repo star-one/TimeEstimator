@@ -1,0 +1,41 @@
+      <h2>
+        Estimate time
+      </h2>
+      <form name="estimatetimeform" id="estimatetimeform" action="." method="post">
+        <label for="sampleTime" class="form-label">Sample time (minutes):</label>
+        <input type="number" class="form-control" name="sampleTime" id="sampleTime" onKeyUp="javascript:updateTime();" required />
+        <label for="multiplier" class="form-label">Multiplier:</label>
+        <input type="number" class="form-control" name="multiplier" id="multiplier" value="1" onKeyUp="javascript:updateTime();" required />
+        <label for="numberOfPeople" class="form-label">Number of people:</label>
+        <input type="number" class="form-control" name="numberOfPeople" id="numberOfPeople" value="1" onKeyUp="javascript:updateTime();" required />
+        <label for="percentageUtilisation" class="form-label">Percentage utilisation:</label>
+        <input type="number" class="form-control" name="percentageUtilisation" id="percentageUtilisation" value="50" onKeyUp="javascript:updateTime();" required />
+        <label for="totalProductionTime" class="form-label">Total production time:</label>
+        <span id="totalProductionTime"></span><br />
+        <label for="realProductionTime" class="form-label">Real production time:</label>
+        <span id="realProductionTime"></span>
+        <label for="elapsedProductionTime" class="form-label">Elapsed production time:</label>
+        <span id="elapsedProductionTime"></span>
+      </form>
+      <script>
+        function timeConvert(minutes) {
+          return `${Math.floor(minutes / 24 / 60)} days ${Math.floor((minutes / 60) % 24)} hours ${Math.floor(minutes % 60)} minutes`;
+        }
+        function elapsedTimeConvert(minutes) {
+          // There are 7 hours in a working day - change this to suit your preferences
+          return `${Math.floor(minutes / 7 / 60)} days ${Math.floor((minutes / 60) % 7)} hours ${Math.floor(minutes % 60)} minutes`;
+        }
+        function updateTime()
+        {
+          sampleTime = document.getElementById('sampleTime').value;
+          multiplier = document.getElementById('multiplier').value;
+          numberOfPeople = document.getElementById('numberOfPeople').value;
+          percentageUtilisation = document.getElementById('percentageUtilisation').value;
+          
+          totalProductionTime = Math.round(((sampleTime * multiplier) / numberOfPeople));
+          realProductionTime = Math.round(totalProductionTime / (percentageUtilisation / 100));
+          document.getElementById("totalProductionTime").innerHTML = timeConvert(totalProductionTime);
+          document.getElementById("realProductionTime").innerHTML = timeConvert(realProductionTime);
+          document.getElementById("elapsedProductionTime").innerHTML = elapsedTimeConvert(realProductionTime);
+        }
+      </script>
