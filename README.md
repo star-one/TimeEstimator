@@ -11,7 +11,7 @@ But actually, you're not going to be working on migrating content for every minu
 
 Problem is your managers have left it a bit late to actually start this task, because they forgot that the contract for the existing CMS expires in 14 days. Fortunately there was a significant underspend on another project which the budget holder has agreed can be spent on hiring in some temporary help for you, if you all work 7 day weeks. Phew!
 
-You thus calculate that if there are 4 of you on the task you can get the whole thing done in 14 days, 3 hours, and 11 minutes; that's a squeeze, so you persuade the boss lady to give you budget for 5 people getting the job done in 11 days, 3 hours, and 57 minutes. Time to spend a bit more time finessing!
+You thus calculate that if there are 4 of you on the task you can get the whole thing done in 14 days, 3 hours, and 11 minutes; that's a squeeze, so you persuade the boss to give you budget for 5 people getting the job done in 11 days, 3 hours, and 57 minutes. Time to spend a bit more time finessing!
 
 This little form snippet is the calculator tool which will let you estimate all that.
 
