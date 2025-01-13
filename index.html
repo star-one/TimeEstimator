@@ -10,21 +10,39 @@
         <input type="number" class="form-control" name="numberOfPeople" id="numberOfPeople" value="1" onKeyUp="javascript:updateTime();" required />
         <label for="percentageUtilisation" class="form-label">Percentage utilisation:</label>
         <input type="number" class="form-control" name="percentageUtilisation" id="percentageUtilisation" value="50" onKeyUp="javascript:updateTime();" required />
-        <label for="totalProductionTime" class="form-label">Total production time:</label>
-        <span id="totalProductionTime"></span><br />
-        <label for="realProductionTime" class="form-label">Real production time:</label>
-        <span id="realProductionTime"></span>
-        <label for="elapsedProductionTime" class="form-label">Elapsed production time:</label>
-        <span id="elapsedProductionTime"></span>
+        <label for="billableProductionTime" class="form-label">Total billable hours:</label>
+        <span id="billableProductionTime">0 hours 0 minutes</span><br />
+        <label for="realProductionTime" class="form-label">Actual production time:</label>
+        <span id="realProductionTime">0 hours 0 minutes</span>
+        <label for="elapsedProductionTime" class="form-label">Elapsed production time in working days:</label>
+        <span id="elapsedProductionTime">0 days 0 hours 0 minutes</span>
       </form>
       <script>
-        function timeConvert(minutes) {
+        function calculateWorkingDays(totalDays) {
+          // This function is a blunt instrument. I'll do it more stylishly in due course
+          actualDays = 0;
+          workingDays = 0;
+
+          while (workingDays < totalDays) {
+            actualDays++;
+            // Check if the current day is a working day (Monday to Friday)
+            if (actualDays % 7 !== 6 && actualDays % 7 !== 0) {
+                workingDays++;
+            }
+          }
+          return actualDays;
+        }
+        function billableConvert(minutes) {
+          return `${Math.floor(minutes / 60)} hours ${Math.floor(minutes % 60)} minutes`;
+        }
+        function daysConvert(minutes) {
           return `${Math.floor(minutes / 24 / 60)} days ${Math.floor((minutes / 60) % 24)} hours ${Math.floor(minutes % 60)} minutes`;
         }
         function elapsedTimeConvert(minutes) {
           // There are 7 hours in a working day - change this to suit your preferences
-          return `${Math.floor(minutes / 7 / 60)} days ${Math.floor((minutes / 60) % 7)} hours ${Math.floor(minutes % 60)} minutes`;
+          return `${calculateWorkingDays(Math.floor(minutes / 7 / 60))} days ${Math.floor((minutes / 60) % 7)} hours ${Math.floor(minutes % 60)} minutes`;
         }
+
         function updateTime()
         {
           sampleTime = document.getElementById('sampleTime').value;
@@ -34,8 +52,8 @@
           
           totalProductionTime = Math.round(((sampleTime * multiplier) / numberOfPeople));
           realProductionTime = Math.round(totalProductionTime / (percentageUtilisation / 100));
-          document.getElementById("totalProductionTime").innerHTML = timeConvert(totalProductionTime);
-          document.getElementById("realProductionTime").innerHTML = timeConvert(realProductionTime);
+          document.getElementById("billableProductionTime").innerHTML = billableConvert(totalProductionTime);
+          document.getElementById("realProductionTime").innerHTML = billableConvert(realProductionTime);
           document.getElementById("elapsedProductionTime").innerHTML = elapsedTimeConvert(realProductionTime);
         }
       </script>
