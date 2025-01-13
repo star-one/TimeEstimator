@@ -16,7 +16,7 @@ You thus calculate that if there are 4 of you on the task you can get the whole 
 This little form snippet is the calculator tool which will let you estimate all that.
 
 # To Do
-Make it so that it knows about weekends. Nobody wants to work weekends.
+Make it so that it can calculate an end date from a given start date.
 
 # To Consider Doing
 Make it so users can set constants such as length of working day and working week to suit their circumstances rather than them being hardcoded in.
