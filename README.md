@@ -16,7 +16,7 @@ You thus calculate that if there are 4 of you on the task you can get the whole 
 This little form snippet is the calculator tool which will let you estimate all that.
 
 # To Do
-Make it so that it can calculate an end date from a given start date.
+The calculation of working days vs absolute days, and by extension the end date calculator, is still something of a blunt instrument which is not correct in all cases, so needs further refinement.
 
 # To Consider Doing
 Make it so users can set constants such as length of working day and working week to suit their circumstances rather than them being hardcoded in.
