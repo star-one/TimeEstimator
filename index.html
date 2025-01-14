@@ -5,22 +5,33 @@
         <label for="sampleTime" class="form-label">Sample time (minutes):</label>
         <input type="number" class="form-control" name="sampleTime" id="sampleTime" onKeyUp="javascript:updateTime();" />
         <label for="multiplier" class="form-label">Multiplier:</label>
-        <input type="number" class="form-control" name="multiplier" id="multiplier" value="1" onKeyUp="javascript:updateTime();" required />
+        <input type="number" class="form-control" name="multiplier" id="multiplier" value="1" onKeyUp="javascript:updateTime();" />
         <label for="numberOfPeople" class="form-label">Number of people:</label>
-        <input type="number" class="form-control" name="numberOfPeople" id="numberOfPeople" value="1" onKeyUp="javascript:updateTime();" required />
+        <input type="number" class="form-control" name="numberOfPeople" id="numberOfPeople" value="1" onKeyUp="javascript:updateTime();" />
         <label for="percentageUtilisation" class="form-label">Percentage utilisation:</label>
-        <input type="number" class="form-control" name="percentageUtilisation" id="percentageUtilisation" value="50" onKeyUp="javascript:updateTime();" required />
-        <label for="billableProductionTime" class="form-label">Total billable hours:</label>
+        <input type="number" class="form-control" name="percentageUtilisation" id="percentageUtilisation" value="50" onKeyUp="javascript:updateTime();" />
+         <label for="startDate" class="form-label">Start date:</label>
+        <input type="date" class="form-control" name="startDate" id="startDate" onKeyUp="javascript:updateTime();" onClick="javascript:updateTime();" />
+       <label for="billableProductionTime" class="form-label">Total billable hours:</label>
         <span id="billableProductionTime">0 hours 0 minutes</span><br />
         <label for="realProductionTime" class="form-label">Actual production time:</label>
         <span id="realProductionTime">0 hours 0 minutes</span><br />
         <label for="absoluteProductionTime" class="form-label">Absolute time:</label>
         <span id="absoluteProductionTime">0 days 0 hours 0 minutes</span><br />
         <label for="elapsedProductionTime" class="form-label">Elapsed time:</label>
-        <span id="elapsedProductionTime">0 working days</span>
+        <span id="elapsedProductionTime">0 working days</span><br />
+        <label for="endDate" class="form-label">End date:</label>
+        <span id="endDate"></span>
       </form>
       <script>
-        function calculateWorkingDays(totalDays) {
+        document.getElementById('startDate').valueAsDate = new Date();
+        
+        function addDays(date, days) {
+          const endDate = new Date(Number(date));
+          endDate.setDate(date.getDate() + days); console.log(endDate.toDateString());
+          return endDate.toDateString();
+        }
+       function calculateWorkingDays(totalDays) {
           // This function is a blunt instrument. I'll do it more stylishly in due course
           actualDays = 0;
           workingDays = 0;
@@ -33,6 +44,8 @@
             }
             if(actualDays > 365) { return "Far too many"; }
           }
+          const date = new Date(document.getElementById('startDate').value);
+          document.getElementById("endDate").innerHTML = addDays(date, actualDays);
           return actualDays;
         }
         function billableConvert(minutes) {
